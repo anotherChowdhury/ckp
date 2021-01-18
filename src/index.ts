@@ -17,11 +17,9 @@ const seed = async (conn: Connection) => {
   store.name = "Umar's Store"
   store.address = 'Test Address'
   store.description = 'Test Description'
-  store.categories = []
 
   const mainCat = new Category()
   mainCat.name = 'Main Category'
-  mainCat.parent = null
   mainCat.store = store
 
   const subCat = new Category()
@@ -39,7 +37,7 @@ const seed = async (conn: Connection) => {
     await conn.manager.save(user)
   } catch (err) {
     console.log('Error occured in user creation')
-    console.log(err)
+    //  console.log(err)
     console.log('-----------------------------------')
   }
 
@@ -47,7 +45,7 @@ const seed = async (conn: Connection) => {
     await conn.manager.save(store)
   } catch (err) {
     console.log('Error occured in store creation')
-    console.log(err)
+    //  console.log(err)
     console.log('-----------------------------------')
   }
 
@@ -55,50 +53,52 @@ const seed = async (conn: Connection) => {
     await conn.manager.save(mainCat)
   } catch (err) {
     console.log('Error occured in main category creation')
-    console.log(err)
+    //  console.log(err)
     console.log('-----------------------------------')
   }
   try {
     await conn.manager.save(subCat)
   } catch (err) {
     console.log('Error occured in sub category creation')
-    console.log(err)
+    //  console.log(err)
     console.log('-----------------------------------')
   }
   try {
     await conn.manager.save(food)
   } catch (err) {
     console.log('Error occured in food creation')
-    console.log(err)
+    //  console.log(err)
     console.log('-----------------------------------')
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-const drop = async (conn: Connection) => {
-  conn.dropDatabase()
+const getData = async (conn: Connection) => {
+  const store = await conn.manager.findOne(Store, { id: 1 }, { relations: ['categories'] })
+
+  console.log(store)
+
+  const cat = await conn.manager.findOne(Category, { id: 2 }, { relations: ['parent', 'foods'] })
+
+  console.log(cat)
+
+  const food = await conn.manager.findOne(Food, { id: 1 }, { relations: ['category'] })
+  console.log(food)
+}
+
+const dropAll = async (conn: Connection) => {
+  await conn.dropDatabase()
   console.log('dropped')
 }
+
 ;(async () => {
   try {
     const conn = await createConnection({ ...typeOrmConfig, entities: [User, Store, Category, Food] })
-
     console.log('Conntected')
 
-    await seed(conn)
-
-    // const store = await conn.manager.findOne(Store, { id: 1 }, { relations: ['categories'] })
-
-    // console.log(store)
-
-    // const cat = await conn.manager.findOne(Category, { id: 2 }, { relations: ['foods'] })
-
-    // console.log(cat)
-
-    // const food = await conn.manager.findOne(Food, { id: 1 }, { relations: ['category'] })
-    // console.log(food)
-
+    // await seed(conn)
+    await getData(conn)
     await conn.close()
+
     console.log('Conection closed')
   } catch (err) {
     console.log(err)

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm'
 import { Food } from './Food'
 import { Store } from './Store'
 
@@ -10,12 +10,13 @@ export class Category {
   @Column()
   name: string
 
-  @ManyToOne((type) => Store, (store: Store) => store.id)
+  @ManyToOne((type) => Store, (store: Store) => store.categories)
   store: Store
 
   @OneToOne((type) => Category, (category: Category) => category.id)
-  parent: Category | null
+  @JoinColumn()
+  parent: Category
 
-  @ManyToOne((type) => Food, (food: Food) => food.id)
+  @OneToMany((type) => Food, (food: Food) => food.category)
   foods: Food[]
 }

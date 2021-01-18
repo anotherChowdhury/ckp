@@ -7,7 +7,7 @@ export class Store {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne((type) => User, (user: User) => user.id)
+  @ManyToOne((type) => User, (user: User) => user.stores)
   owner: User
 
   @Column({ unique: true })
@@ -19,6 +19,6 @@ export class Store {
   @Column('text', { nullable: true })
   address: string
 
-  @OneToMany((type) => Category, (category: Category) => category.id)
+  @OneToMany((type) => Category, (category: Category) => category.store)
   categories: Category[]
 }

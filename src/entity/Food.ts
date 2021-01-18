@@ -15,7 +15,7 @@ export class Food {
   @Column({ nullable: false })
   price: number
 
-  @ManyToOne((type) => Category, (category: Category) => category.id)
+  @ManyToOne((type) => Category, (category: Category) => category.foods)
   category: Category
 
   @Column('boolean', { default: true })

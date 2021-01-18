@@ -18,6 +18,6 @@ export class User {
   @Column('boolean', { default: true })
   isActive: boolean
 
-  @OneToMany((type) => Store, (store: Store) => store.id)
+  @OneToMany((type) => Store, (store: Store) => store.owner)
   stores: Store[]
 }
