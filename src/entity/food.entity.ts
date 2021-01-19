@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
-import { Category } from './Category'
+import { Category } from './category.entity'
 
 @Entity()
 export class Food {

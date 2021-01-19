@@ -1,10 +1,10 @@
 import 'reflect-metadata'
 import { Connection, createConnection } from 'typeorm'
-import { typeOrmConfig } from '../ormconfig'
-import { Category } from './entity/Category'
-import { Food } from './entity/Food'
-import { Store } from './entity/Store'
-import { User } from './entity/User'
+import { typeOrmConfig } from './ormconfig'
+import { Category } from './entity/category.entity'
+import { Food } from './entity/food.entity'
+import { Store } from './entity/store.entity'
+import { User } from './entity/user.entity'
 
 const seed = async (conn: Connection) => {
   const user = new User()
