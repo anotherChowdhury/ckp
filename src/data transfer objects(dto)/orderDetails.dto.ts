@@ -7,6 +7,7 @@ class OrderDetailsDTO {
   @IsDefined()
   order: Order
 
+  @IsOptional()
   @IsInt()
   orderId: number
 
