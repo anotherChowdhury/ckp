@@ -12,6 +12,11 @@ const typeOrmConfig: PostgresConnectionOptions = {
   synchronize: true,
   logging: true,
   ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  },
   entities: [path.join(__dirname, '/entity/*.{ts,js}')]
 }
 
