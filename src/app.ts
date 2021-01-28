@@ -4,11 +4,11 @@ import errorMiddleware from './middlewares/errorHandler.middleware'
 
 class App {
   public app: Application
-  public port: number
+  public port: number | string
 
   constructor(controllers: Controller[], port: number) {
     this.app = express()
-    this.port = port
+    this.port = process.env.PORT || port
     this.initializeMiddlewares()
     this.initializeControllers(controllers)
     this.initilizeErrorHandling()

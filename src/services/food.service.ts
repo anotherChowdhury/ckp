@@ -8,7 +8,7 @@ class FoodService {
   private categoryRepository = getRepository(Category)
   private foodRepository = getRepository(Food)
 
-  public async add(foodData: FoodDTO) {
+  public async add(foodData: FoodDTO): Promise<Food> {
     const category: Category | undefined = await this.categoryRepository.findOne({ id: Number(foodData.category) })
     if (!category) throw new HttpException(404, 'Category not found')
 
@@ -40,7 +40,7 @@ class FoodService {
   public async delete(id: number | string) {
     const deleteResponse = await this.foodRepository.delete(id)
     console.log(deleteResponse)
-    if (!deleteResponse.affected) throw new HttpException(400, 'Category Not Found')
+    if (!deleteResponse.affected) throw new HttpException(400, 'Food Not Found')
   }
 }
 

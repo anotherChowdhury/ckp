@@ -10,7 +10,7 @@ function validationMiddleware<T>(type: any, skipMissingProperties: boolean = fal
       next()
     } catch (errors) {
       console.log(errors)
-      const message = errors.map((error: ValidationError | any) => Object.values(error.constraints)).join(', ')
+      const message = errors.map((error: ValidationError | any) => Object.values(error.constraints)).join('  , ')
       next(new HttpException(400, message))
     }
   }

@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm'
 import { Store } from './store.entity'
 
 @Entity()
@@ -20,4 +20,10 @@ export class User {
 
   @OneToMany((type) => Store, (store: Store) => store.owner)
   stores: Store[]
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date
 }

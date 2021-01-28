@@ -1,4 +1,12 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm'
 import { Category } from './category.entity'
 import { User } from './user.entity'
 
@@ -21,4 +29,10 @@ export class Store {
 
   @OneToMany((type) => Category, (category: Category) => category.store)
   categories: Category[]
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date
 }

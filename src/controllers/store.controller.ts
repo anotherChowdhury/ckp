@@ -46,6 +46,7 @@ class StoreController implements Controller {
       await this.storeService.edit(id, editedStoreData)
       const updatedPost = await this.storeService.getStore({ id: id })
       if (!updatedPost) throw new HttpException(404, 'Not Found')
+      response.status(200).send()
     } catch (error) {
       next(error)
     }
