@@ -10,7 +10,8 @@ const typeOrmConfig: PostgresConnectionOptions = {
   // password: 'password',
   // database: 'ckp_demo',
   synchronize: true,
-  logging: false,
+  logging: true,
+  ssl: true,
   entities: [path.join(__dirname, '/entity/*.{ts,js}')]
 }
 
